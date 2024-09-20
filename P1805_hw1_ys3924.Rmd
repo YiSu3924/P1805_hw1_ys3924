@@ -5,7 +5,7 @@ date: "2024-09-20"
 output: github_document
 ---
 
-```{r setup, echo=FALSE, message=FALSE}
+```{r setup, message=FALSE}
 library(tidyverse)
 ```
 
@@ -50,6 +50,7 @@ ggsave("penguins_scatterplot.png")
 
 ## Create the data frame
 
+Create the data frame by using the tibble function.
 ```{r}
 set.seed(1805)
 df = tibble(
@@ -58,5 +59,27 @@ df = tibble(
   vec_char = c("this", "is", "ds", "class", "for", "master", "student", "in", "c", "u"),
   vec_factor = factor(sample(c("low", "med", "high"), 10, replace = TRUE))
 )
+# Print the data frame
 df
 ```
+
+## Take the mean of a variable in a dataframe
+```{r}
+mean(pull(df, sample))
+mean(pull(df, vec_logical))
+# mean(pull(df, vec_char))
+# mean(pull(df, vec_factor))
+```
+
+When taking the mean of each variable in the dataframe, the numeric and logical variables work. However, the character vector and factor vector do not work, because the error appears.
+
+
+## Change the variable type
+```{r, eval=FALSE, warning=FALSE}
+mean(pull(df, sample))
+mean(as.numeric(pull(df, vec_logical)))
+mean(as.numeric(pull(df, vec_char)))
+mean(as.numeric(pull(df, vec_factor)))
+```
+After applying the as.numeric function to the logical, character, and factor variables, the error disappears. To be more specific, logical values results in TRUE becoming 1 and FALSE becoming 0. The mean of character vector produces NA values, because there is no numerical representation of character variables. The factor variables are converted to integers to represent each level.
+
