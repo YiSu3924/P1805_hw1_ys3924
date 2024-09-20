@@ -1,0 +1,11 @@
+---
+title: "P1805_hw1_ys3924"
+author: "YISU"
+date: "2024-09-20"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
